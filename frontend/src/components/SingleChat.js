@@ -52,7 +52,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     setNotification,
   } = ChatState();
 
-  /* ----------------------- TYPING ANIMATION ----------------------- */
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -60,7 +59,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     rendererSettings: { preserveAspectRatio: "xMidYMid slice" },
   };
 
-  /* ----------------------- FETCH MESSAGES -------------------------- */
   const fetchMessages = useCallback(async () => {
     if (!selectedChat || !user) return;
 
@@ -88,7 +86,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     }
   }, [selectedChat, user, toast]);
 
-  /* ----------------------- SEND MESSAGE ---------------------------- */
   const sendMessage = async () => {
     if (!newMessage.trim()) return;
 
@@ -125,12 +122,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     }
   };
 
-  /* ----------------------- EMOJI ---------------------------------- */
   const onEmojiClick = (emojiData) => {
     setNewMessage((prev) => prev + emojiData.emoji);
   };
 
-  /* ----------------------- SOCKET SETUP ---------------------------- */
   useEffect(() => {
     if (!user) return;
 
@@ -141,13 +136,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     socket.on("stop typing", () => setIsTyping(false));
   }, [user]);
 
-  /* ----------------------- CHAT CHANGE ----------------------------- */
   useEffect(() => {
     fetchMessages();
     selectedChatCompare = selectedChat;
   }, [selectedChat, fetchMessages]);
 
-  /* ----------------------- RECEIVE MESSAGE ------------------------- */
   useEffect(() => {
     if (!socket) return;
 
@@ -164,18 +157,19 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     });
   }, [fetchAgain, setFetchAgain, setNotification]);
 
-  /* ======================= UI ==================================== */
   return (
     <>
       {selectedChat ? (
         <>
-          <Text
+          {/* 🔥 HEADER FIX APPLIED HERE */}
+          <Box
             fontSize="xl"
             pb={3}
             px={2}
             display="flex"
             justifyContent="space-between"
             alignItems="center"
+            w="100%"
           >
             <IconButton
               display={{ base: "flex", md: "none" }}
@@ -191,12 +185,17 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 />
               </>
             ) : (
-              <>
-                {selectedChat.chatName.toUpperCase()}
+              <Box
+                display="flex"
+                w="100%"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Text>{selectedChat.chatName.toUpperCase()}</Text>
                 <UpdateGroupChatModal />
-              </>
+              </Box>
             )}
-          </Text>
+          </Box>
 
           <Box
             display="flex"
@@ -214,7 +213,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               <ScrollableChat messages={messages} />
             )}
 
-            {/* ✅ UPLOAD PROGRESS BAR */}
             {uploadProgress > 0 && (
               <Progress value={uploadProgress} size="sm" mt={2} />
             )}
