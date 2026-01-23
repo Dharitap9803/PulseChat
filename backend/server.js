@@ -17,11 +17,15 @@ const app = express();
 /* -------------------- MIDDLEWARE -------------------- */
 app.use(express.json()); // to accept json data
 
+// ✅ UPDATED CORS CONFIG
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://pulsechat-xalu.onrender.com",
+];
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    origin: allowedOrigins,
     credentials: true,
   })
 );
@@ -62,8 +66,7 @@ server.listen(
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
+    origin: allowedOrigins,
     credentials: true,
   },
 });

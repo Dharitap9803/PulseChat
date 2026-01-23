@@ -41,7 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password,
-    pic,
+    pic: pic ? pic.replace("http://", "https://") : pic,
   });
 
   if (user) {
@@ -50,7 +50,7 @@ const registerUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      pic: user.pic,
+      pic: user.pic ? user.pic.replace("http://", "https://") : user.pic,
       token: generateToken(user._id),
     });
   } else {
@@ -73,7 +73,7 @@ const authUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      pic: user.pic,
+      pic: user.pic ? user.pic.replace("http://", "https://") : user.pic,
       token: generateToken(user._id),
     });
   } else {
