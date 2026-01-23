@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react"; 
+import React, { useState, useEffect, useCallback } from "react"; 
 import { FormControl } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
 import { Box, Text, Progress } from "@chakra-ui/react";
@@ -25,7 +25,11 @@ import EmojiPicker from "emoji-picker-react";
 
 import "./styles.css";
 
-const ENDPOINT = "http://localhost:5001";
+/* ✅ FIXED ENDPOINT */
+const ENDPOINT =
+  process.env.NODE_ENV === "production"
+    ? "https://pulsechat-xalu.onrender.com"
+    : "http://localhost:5001";
 let socket;
 let selectedChatCompare;
 
@@ -127,14 +131,18 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   };
 
   useEffect(() => {
-    if (!user) return;
+  if (!user) return;
 
-    socket = io(ENDPOINT);
-    socket.emit("setup", user);
+  socket = io(ENDPOINT);
+  socket.emit("setup", user);
 
-    socket.on("typing", () => setIsTyping(true));
-    socket.on("stop typing", () => setIsTyping(false));
-  }, [user]);
+  socket.on("typing", () => setIsTyping(true));
+  socket.on("stop typing", () => setIsTyping(false));
+
+  return () => {
+    socket.disconnect(); // ✅ ADD THIS
+  };
+}, [user]);
 
   useEffect(() => {
     fetchMessages();

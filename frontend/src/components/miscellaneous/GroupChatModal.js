@@ -20,7 +20,10 @@ import UserBadgeItem from "../userAvatar/UserBadgeItem";
 import UserListItem from "../userAvatar/UserListItem";
 
 /* ✅ BACKEND PORT FIX */
-const ENDPOINT = "http://localhost:5001";
+const ENDPOINT =
+  process.env.NODE_ENV === "production"
+    ? "https://pulsechat-xalu.onrender.com"
+    : "http://localhost:5001";
 
 const GroupChatModal = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();

@@ -9,6 +9,11 @@ import GroupChatModal from "./miscellaneous/GroupChatModal";
 import { Button } from "@chakra-ui/react";
 import { ChatState } from "../Context/ChatProvider";
 
+const ENDPOINT =
+  process.env.NODE_ENV === "production"
+    ? "https://pulsechat-xalu.onrender.com"
+    : "http://localhost:5001";
+
 const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState(null);
 
@@ -26,11 +31,8 @@ const MyChats = ({ fetchAgain }) => {
         },
       };
 
-      // ✅ CORRECT BACKEND PORT (5001)
-      const { data } = await axios.get(
-        "http://localhost:5001/api/chat",
-        config
-      );
+     // ✅ USING ENVIRONMENT-SAFE ENDPOINT
+      const { data } = await axios.get(`${ENDPOINT}/api/chat`, config);
 
       setChats(data);
     } catch (error) {
