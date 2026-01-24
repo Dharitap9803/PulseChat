@@ -172,9 +172,7 @@ This ensures uninterrupted communication even during network fluctuations.
 
 ## Screenshots
 
-## Screenshots
-
-### Chat Dashboard ![Mainscreen](screenshots/mainscreen.png)
+### Chat Dashboard ![Mainscreen](screenshots/mainscreen.PNG)
 
 ### Login Page ![Login](screenshots/Loginpage.png)
 
