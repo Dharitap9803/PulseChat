@@ -172,11 +172,26 @@ This ensures uninterrupted communication even during network fluctuations.
 
 ## Screenshots
 
-* Login Page
-* Chat Dashboard
-* Single Chat View
-* Group Chat Creation
-* Profile Modal
+## Screenshots
+
+### Chat Dashboard ![Dashboard](screenshots/mainscreen.png)
+
+### Login Page ![Login](screenshots/Loginpage.png)
+
+### Sign-Up Page ![SignUp](screenshots/signuppage.png)
+
+### One-to-One Chat Page ![SingleChat](screenshots/realtime.jpeg)
+
+### Group Chat Creation ![GroupChatCreate](screenshots/creategroupchat.png)
+
+### Profile Modal ![Profile](screenshots/profilepage.png)
+
+### Notifications Panel ![Notifications](screenshots/messagenotification.png)
+
+### Search Users ![Search](screenshots/searchuserpage.png)
+
+### Add / Remove Group Members ![GroupManage](screenshots/updategroupchatpage.png)
+
 
 
 **PulseChat** is designed to be fast, intuitive, and scalable — delivering a smooth real-time communication experience with modern UI principles and robust interaction handling.
